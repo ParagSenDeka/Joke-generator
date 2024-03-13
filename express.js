@@ -1,12 +1,18 @@
 import express from "express";
 import axios from "axios";
+import path,{dirname} from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 const app=express();
 const port=3000;
 const URL="https://v2.jokeapi.dev/joke/Any";
 
 app.use(express.urlencoded({extended:true}));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname,"public")));
 
 app.get("/",(req,res)=>{
     res.render("index.ejs");
